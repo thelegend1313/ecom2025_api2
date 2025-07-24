@@ -12,16 +12,6 @@ app.use(cors())
 // app.use('/api',authRouter)
 // app.use('/api',categoryRouter)
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
-app.use('/api', createProxyMiddleware({ 
-    target: 'http://localhost:8080/', //original url
-    changeOrigin: true, 
-    //secure: false,
-    onProxyRes: function (proxyRes, req, res) {
-       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-    }
-}));
-
 readdirSync('./routes')
 .map((c) => app.use('/api',require('./routes/'+c)) )
 
